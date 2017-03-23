@@ -128,7 +128,7 @@ var _ = Describe("Messager", func() {
 				errorMessage := "error"
 				messager.Fatal(errorMessage)
 				responseWritter.Flush()
-				Expect(responseBuffer.String()).To(Equal(errorMessage + "\n"))
+				Expect(responseBuffer.String()).To(ContainSubstring(errorMessage))
 			})
 		})
 	})
@@ -147,7 +147,7 @@ var _ = Describe("Messager", func() {
 				errorDetails := "it's an error"
 				messager.FatalIf(errorMessage, errors.New(errorDetails))
 				responseWritter.Flush()
-				Expect(responseBuffer.String()).To(Equal(errorMessage + ": " + errorDetails + "\n"))
+				Expect(responseBuffer.String()).To(ContainSubstring(errorMessage + ": " + errorDetails))
 			})
 		})
 	})
