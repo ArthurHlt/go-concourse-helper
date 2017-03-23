@@ -4,7 +4,10 @@ type InCommand struct {
 	*Command
 }
 
-func NewInCommand(messager *Messager) (*InCommand, error) {
+func NewInCommand() (*InCommand, error) {
+	return NewInCommandWithMessager(NewMessager())
+}
+func NewInCommandWithMessager(messager *Messager) (*InCommand, error) {
 	cmd, err := NewCommand(messager)
 	if err != nil {
 		return nil, err

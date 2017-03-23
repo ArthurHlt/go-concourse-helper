@@ -4,7 +4,10 @@ type OutCommand struct {
 	*Command
 }
 
-func NewOutCommand(messager *Messager) (*OutCommand, error) {
+func NewOutCommand() (*OutCommand, error) {
+	return NewOutCommandWithMessager(NewMessager())
+}
+func NewOutCommandWithMessager(messager *Messager) (*OutCommand, error) {
 	cmd, err := NewCommand(messager)
 	if err != nil {
 		return nil, err

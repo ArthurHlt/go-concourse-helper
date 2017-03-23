@@ -42,7 +42,7 @@ var _ = Describe("Check", func() {
 		if err != nil {
 			Fail(err.Error())
 		}
-		command, err = NewCheckCommand(messager)
+		command, err = NewCheckCommandWithMessager(messager)
 		if err != nil {
 			Fail(err.Error())
 		}

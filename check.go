@@ -6,7 +6,10 @@ type CheckCommand struct {
 	*Command
 }
 
-func NewCheckCommand(messager *Messager) (*CheckCommand, error) {
+func NewCheckCommand() (*CheckCommand, error) {
+	return NewCheckCommandWithMessager(NewMessager())
+}
+func NewCheckCommandWithMessager(messager *Messager) (*CheckCommand, error) {
 	cmd, err := NewCommand(messager)
 	if err != nil {
 		return nil, err
