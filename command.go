@@ -17,6 +17,9 @@ func NewCommand(messager *Messager) *Command {
 func (c Command) Messager() *Messager {
 	return c.messager
 }
+func (c Command) Version() Version {
+	return c.request.Version
+}
 func (c Command) Source(v interface{}) error {
 	b, _ := json.Marshal(c.request.Source)
 	return json.Unmarshal(b, v)
