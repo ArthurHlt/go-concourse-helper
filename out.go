@@ -4,15 +4,12 @@ type OutCommand struct {
 	*Command
 }
 
-func NewOutCommand() (*OutCommand, error) {
+func NewOutCommand() *OutCommand {
 	return NewOutCommandWithMessager(NewMessager())
 }
-func NewOutCommandWithMessager(messager *Messager) (*OutCommand, error) {
-	cmd, err := NewCommand(messager)
-	if err != nil {
-		return nil, err
-	}
-	return &OutCommand{cmd}, nil
+func NewOutCommandWithMessager(messager *Messager) *OutCommand {
+	cmd := NewCommand(messager)
+	return &OutCommand{cmd}
 }
 
 func (c *OutCommand) SourceFolder() string {

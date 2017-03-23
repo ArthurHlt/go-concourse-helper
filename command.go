@@ -7,15 +7,12 @@ type Command struct {
 	request  Request
 }
 
-func NewCommand(messager *Messager) (*Command, error) {
+func NewCommand(messager *Messager) *Command {
 	command := &Command{
 		messager: messager,
 	}
-	err := command.load()
-	if err != nil {
-		return nil, err
-	}
-	return command, nil
+	command.load()
+	return command
 }
 func (c Command) Messager() *Messager {
 	return c.messager
@@ -28,8 +25,11 @@ func (c Command) Params(v interface{}) error {
 	b, _ := json.Marshal(c.request.Params)
 	return json.Unmarshal(b, v)
 }
-func (c *Command) load() error {
-	return c.messager.RetrieveJsonRequest(&c.request)
+func (c *Command) load() {
+	err := c.messager.RetrieveJsonRequest(&c.request)
+	if err != nil {
+		c.messager.Fatal("Error when parsing object given by concourse: " + err.Error())
+	}
 }
 func (c Command) Send(metadata []Metadata) {
 	c.messager.SendJsonResponse(Response{

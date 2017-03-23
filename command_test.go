@@ -43,10 +43,7 @@ var _ = Describe("Command", func() {
 		if err != nil {
 			Fail(err.Error())
 		}
-		command, err = NewCommand(messager)
-		if err != nil {
-			Fail(err.Error())
-		}
+		command = NewCommand(messager)
 	})
 	Describe("Source", func() {
 		Context("when passing a struct with json template as source", func() {

@@ -42,10 +42,7 @@ var _ = Describe("Check", func() {
 		if err != nil {
 			Fail(err.Error())
 		}
-		command, err = NewCheckCommandWithMessager(messager)
-		if err != nil {
-			Fail(err.Error())
-		}
+		command = NewCheckCommandWithMessager(messager)
 	})
 	Describe("Params", func() {
 		It("should return an error", func() {

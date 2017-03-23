@@ -6,15 +6,12 @@ type CheckCommand struct {
 	*Command
 }
 
-func NewCheckCommand() (*CheckCommand, error) {
+func NewCheckCommand() *CheckCommand {
 	return NewCheckCommandWithMessager(NewMessager())
 }
-func NewCheckCommandWithMessager(messager *Messager) (*CheckCommand, error) {
-	cmd, err := NewCommand(messager)
-	if err != nil {
-		return nil, err
-	}
-	return &CheckCommand{cmd}, nil
+func NewCheckCommandWithMessager(messager *Messager) *CheckCommand {
+	cmd := NewCommand(messager)
+	return &CheckCommand{cmd}
 }
 func (c CheckCommand) Send(versions []Version) {
 	c.messager.SendJsonResponse(versions)

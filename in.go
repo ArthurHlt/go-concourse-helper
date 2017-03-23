@@ -4,15 +4,12 @@ type InCommand struct {
 	*Command
 }
 
-func NewInCommand() (*InCommand, error) {
+func NewInCommand() *InCommand {
 	return NewInCommandWithMessager(NewMessager())
 }
-func NewInCommandWithMessager(messager *Messager) (*InCommand, error) {
-	cmd, err := NewCommand(messager)
-	if err != nil {
-		return nil, err
-	}
-	return &InCommand{cmd}, nil
+func NewInCommandWithMessager(messager *Messager) *InCommand {
+	cmd := NewCommand(messager)
+	return &InCommand{cmd}
 }
 func (c InCommand) DestinationFolder() string {
 	return c.messager.Directory
