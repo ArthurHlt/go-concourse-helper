@@ -127,6 +127,9 @@ var _ = Describe("Messager", func() {
 			It("should write this message on response writer", func() {
 				errorMessage := "error"
 				messager.Fatal(errorMessage)
+				logWritter.Flush()
+				Expect(logBuffer.String()).To(ContainSubstring(errorMessage))
+
 				responseWritter.Flush()
 				Expect(responseBuffer.String()).To(ContainSubstring(errorMessage))
 			})
@@ -137,6 +140,9 @@ var _ = Describe("Messager", func() {
 			It("should not write this message on response writer", func() {
 				errorMessage := "error"
 				messager.FatalIf(errorMessage, nil)
+				logWritter.Flush()
+				Expect(logBuffer.String()).To(Equal(""))
+
 				responseWritter.Flush()
 				Expect(responseBuffer.String()).To(Equal(""))
 			})
@@ -146,6 +152,9 @@ var _ = Describe("Messager", func() {
 				errorMessage := "error"
 				errorDetails := "it's an error"
 				messager.FatalIf(errorMessage, errors.New(errorDetails))
+				logWritter.Flush()
+				Expect(logBuffer.String()).To(ContainSubstring(errorMessage + ": " + errorDetails))
+
 				responseWritter.Flush()
 				Expect(responseBuffer.String()).To(ContainSubstring(errorMessage + ": " + errorDetails))
 			})

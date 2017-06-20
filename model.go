@@ -1,6 +1,5 @@
 package go_concourse_helper
 
-// regex semver (v|-|_)?v?((?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)
 type Version struct {
 	BuildNumber string `json:"build"`
 }
